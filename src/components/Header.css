@@ -1,0 +1,13 @@
+.link-input{
+    width: 50%;
+}
+
+
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    .link-input{
+        width: 100%;
+    }
+}
