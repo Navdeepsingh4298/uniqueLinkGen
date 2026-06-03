@@ -23,6 +23,7 @@ import copyToClipboard from "../utils/copyToClipboard";
 import downloadAsTxtFile from "../utils/downloadAsTxtFile";
 import DowloadAsCSVFile from "../utils/downloadAsCSVFile";
 import downloadAsQRCodeZipFile from "../utils/downloadAsQRCodeZipFile";
+import downloadAsCSVCombinedFile from "../utils/downloadAsCSVCombinedFile";
 
 // mui icons
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -123,6 +124,30 @@ const Output = (props) => {
     }
   }
 
+  // Function to handle CSV file download with combined IDs and Links
+  const handleDownloadCSVCombinedFile = (ids, links, fileName) => {
+    try {
+      // if data is empty, do not proceed with download
+      if (!ids || ids.length === 0 || !links || links.length === 0) {
+        throw new Error("No data to download. Please generate links and Ids first.");
+      }
+
+      props.setErrorData({ isError: false, ErrMsg: '' }); // Clear previous errors
+
+      downloadAsCSVCombinedFile(ids, links, fileName);
+
+      // Show success message in Snackbar
+      setMsgOpen(true);
+      setSnackbarMsg("CSV file with IDs and Links started downloading!");
+    } catch (error) {
+      console.error("Error downloading combined CSV file:", error);
+      props.setErrorData({
+        isError: true,
+        ErrMsg: error.message,
+      });
+    }
+  }
+
 
   // Function to handle QR code download as zip
   const handleDownloadQRCodes = async (data, fileName) => {
@@ -216,6 +241,17 @@ const Output = (props) => {
                       variant="outlined"
                       color="secondary"
                       onClick={() => handleDownloadCSV(props.outputData.uids, "unique_ids")}><DownloadIcon fontSize="small" />CSV file</Button>
+                  {/* </Tooltip> */}
+                  {/* <Tooltip
+                    title="Button to download generated ids with links as CSV"
+                    arrow
+                    placement="bottom"
+                    slotProps={{ transition: { timeout: 3000 }, }}> */}
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => handleDownloadCSVCombinedFile(props.outputData.uids, props.outputData.links, "ids_links")}><DownloadIcon fontSize="small" />CSV file (ids + links)</Button>
                   {/* </Tooltip> */}
                 </Stack>
               </AccordionDetails>
