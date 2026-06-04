@@ -171,9 +171,15 @@ const DocsPage = () => {
               </tr>
 
               <tr>
-                <td style={tdStyle}>CSV File</td>
-                <td style={tdStyle}>Exports IDs or links in structured .csv format.</td>
-                <td style={tdStyle}>Secure data handling, spreadsheet workflows</td>
+                  <td style={tdStyle}>CSV File</td>
+                  <td style={tdStyle}>Exports IDs or links in structured .csv format.</td>
+                  <td style={tdStyle}>when we need either IDs or links to import into spreadsheet file</td>
+              </tr>
+
+              <tr>
+                  <td style={tdStyle}>Combined CSV File (Ids + Links)</td>
+                  <td style={tdStyle}>Exports IDs and links together in structured .csv format.</td>
+                  <td style={tdStyle}>when we need ids and links in a single spreadsheet file</td>
               </tr>
 
               <tr>
