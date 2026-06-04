@@ -1,4 +1,4 @@
-const genCustomId = ({lengthOfId, prefix = '', suffix = '', useLetters = true, useNumbers = true, useSplChars = false}) => {
+const genCustomId = ({lengthOfId, prefix = '', suffix = '', useLetters = true, useNumbers = true, useSplChars = false, useTimeStamp = false}) => {
     
     //validations
     // if length is less than 5
@@ -17,32 +17,38 @@ const genCustomId = ({lengthOfId, prefix = '', suffix = '', useLetters = true, u
         throw new Error('Prefix and suffix cannot contain special characters.');
     }
 
-    // useLetters and useNumbers both are false
-    if (!useLetters && !useNumbers) {
-        throw new Error('At least one of use Letters or use Numbers must be selected.');
+    // At least one source must be selected
+    if (!useLetters && !useNumbers && !useSplChars && !useTimeStamp) {
+        throw new Error('At least one of useLetters, useNumbers, useSplChars, or useTimeStamp must be selected.');
     }
 
     // can't use only special characters
-    // if (useSplChars && !useLetters && !useNumbers) {
-    //     throw new Error('Special characters cannot be used alone. Please enable letters or numbers.');
-    // }
+    if (useSplChars && !useLetters && !useNumbers && !useTimeStamp) {
+        throw new Error('Special characters cannot be used alone. Please enable letters or numbers or timestamp.');
+    }
+
+    // can't use only timestamp
+    if (useTimeStamp && !useLetters && !useNumbers && !useSplChars) {
+        throw new Error('Timestamp cannot be used alone. Please enable letters or numbers or special characters.');
+    }
 
     // safe special characters to use in ID Hyphen (-), Underscore (_), Period (.), Tilde (~)    
     const specialCharacters = '-_.~';
 
-    // use smallcase letters only for avoid confustion between letters and numbers (like O and 0, I and 1)
+    // use smallcase letters only to avoid confusion between letters and numbers (like O and 0, I and 1)
     const letters = 'abcdefghijklmnopqrstuvwxyz';
     const numbers = '0123456789';
+    const timestampCharacters = Date.now().toString();
 
     let characters = '';
     if (useLetters) characters += letters;
     if (useNumbers) characters += numbers;
     if (useSplChars) characters += specialCharacters;
-
+    if (useTimeStamp) characters += timestampCharacters;
 
     // If no characters are selected, throw an error
     if (characters.length === 0) {
-        throw new Error('At least one of useLetters or useNumbers must be true.');
+        throw new Error('At least one of useLetters, useNumbers, useSplChars, or useTimeStamp must be selected.');
     }
 
     // Generate the random ID based on the specified length and character set
@@ -51,6 +57,16 @@ const genCustomId = ({lengthOfId, prefix = '', suffix = '', useLetters = true, u
         const randomIndex = Math.floor(Math.random() * characters.length);
         result += characters[randomIndex];
     }
+
+    if (useTimeStamp) {
+        const timestampChars = timestampCharacters;
+        if (!result.split('').some(char => timestampChars.includes(char))) {
+            const timestampChar = timestampChars[Math.floor(Math.random() * timestampChars.length)];
+            const insertIndex = Math.floor(Math.random() * result.length);
+            result = result.slice(0, insertIndex) + timestampChar + result.slice(insertIndex + 1);
+        }
+    }
+
     return `${prefix}${result}${suffix}`;
 };
 

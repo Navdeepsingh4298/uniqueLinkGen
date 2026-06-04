@@ -40,6 +40,7 @@ const HomePage = () => {
         useLetters: true,
         useNumbers: true,
         useSplChars: false,
+        useTimeStamp: false,
     });
 
     const [outputData, setOutputData] = useState({

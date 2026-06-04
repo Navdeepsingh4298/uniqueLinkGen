@@ -101,7 +101,15 @@ const Header = (props) => {
                                     checked={props.customDiyOptions.useSplChars}
                                     onChange={(e) => props.handleCustomDiyOptionsChange('useSplChars', e.target.checked)}
                                     disabled={props.inputData.genMethod !== 'custom-diy'}
-                                /> Use Special Chars (-_.~)
+                                /> Use Specials (-_.~)
+                            </label>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={props.customDiyOptions.useTimeStamp}
+                                    onChange={(e) => props.handleCustomDiyOptionsChange('useTimeStamp', e.target.checked)}
+                                    disabled={props.inputData.genMethod !== 'custom-diy'}
+                                /> Use TimeStamp
                             </label>
                             </Box>
                         </Stack>
