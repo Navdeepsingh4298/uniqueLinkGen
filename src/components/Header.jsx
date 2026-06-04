@@ -15,7 +15,7 @@ const Header = (props) => {
                     <label className="link-input">Base Link <br />
                         <input
                             type="text"
-                            placeholder="Enter test link"
+                            placeholder="Enter test link ending with unique id variable (e.g. https://sample.link.com?uid=)"
                             value={props.inputData.link}
                             onChange={(e) => props.handleInputDataChange('link', e.target.value)}
                             style={{ width: '100%' }} />

@@ -226,7 +226,7 @@ const Output = (props) => {
                   placement="bottom" 
                   slotProps={{ transition: { timeout: 3000 }, }}> */}
                     <Button
-                      // size="small"
+                      size="small"
                       variant="outlined"
                       color="secondary"
                       onClick={() => handleDownloadTXT(props.outputData.uids, "unique_ids")}><DownloadIcon fontSize="small" /> Text File</Button>
