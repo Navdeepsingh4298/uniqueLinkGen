@@ -53,7 +53,7 @@ const Header = (props) => {
                     <Button variant="contained" onClick={props.handleGenerateBtn} disableElevation>Generate</Button>
                     {/* </Tooltip> */}
                     {/* <Tooltip title="Button to reset all fields" arrow placement="top-start"> */}
-                    <Button variant="outlined" onClick={props.handleResetBtn}>Reset <RestartAltIcon /></Button>
+                    <Button variant="outlined" color="error" onClick={props.handleResetBtn}>Reset <RestartAltIcon /></Button>
                     {/* </Tooltip> */}
                 </div>
 
