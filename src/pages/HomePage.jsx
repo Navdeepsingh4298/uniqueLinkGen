@@ -39,6 +39,7 @@ const HomePage = () => {
         suffix: '',
         useLetters: true,
         useNumbers: true,
+        useSplChars: false,
     });
 
     const [outputData, setOutputData] = useState({

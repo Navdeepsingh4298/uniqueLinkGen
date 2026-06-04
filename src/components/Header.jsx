@@ -71,11 +71,12 @@ const Header = (props) => {
                                 onChange={(e) => props.handleCustomDiyOptionsChange('lengthOfId', e.target.value)}
                                 disabled={props.inputData.genMethod !== 'custom-diy'}
                             />
-
                         </label>
 
-                        <Stack>
-                            Character Set<br />
+                        <Stack> 
+                            Character Set<br />                           
+                            <Box sx={{display: 'flex', gap: 1}}>
+                                
                             <label>
                                 <input
                                     type="checkbox"
@@ -92,6 +93,17 @@ const Header = (props) => {
                                     disabled={props.inputData.genMethod !== 'custom-diy'}
                                 /> Use Letters (a-z)
                             </label>
+                            </Box>
+                            <Box sx={{display: 'flex'}}>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={props.customDiyOptions.useSplChars}
+                                    onChange={(e) => props.handleCustomDiyOptionsChange('useSplChars', e.target.checked)}
+                                    disabled={props.inputData.genMethod !== 'custom-diy'}
+                                /> Use Special Chars (-_.~)
+                            </label>
+                            </Box>
                         </Stack>
                         <label>
                             Prefix <em>(optional)</em><br />
